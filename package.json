@@ -1,0 +1,46 @@
+{
+  "name": "ecommerce-microservice",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "pnpm -r --parallel dev",
+    "dev:gateway": "pnpm --filter api-geteway dev",
+    "dev:auth": "pnpm --filter auth dev",
+    "dev:cart": "pnpm --filter cart dev",
+    "dev:email": "pnpm --filter email dev",
+    "dev:inventory": "pnpm --filter inventorys dev",
+    "dev:order": "pnpm --filter order dev",
+    "dev:products": "pnpm --filter products dev",
+    "dev:user": "pnpm --filter user dev",
+    "build": "pnpm -r build",
+    "start": "pnpm -r --parallel start",
+    "infra:up": "docker compose up -d",
+    "infra:down": "docker compose down",
+    "prod:up": "docker compose -f docker-compose.yml -f docker-compose.prod.yml up --build -d",
+    "prod:down": "docker compose -f docker-compose.yml -f docker-compose.prod.yml down",
+    "migrate:dev": "pnpm -r migrate:dev",
+    "docker:build": "docker compose -f docker-compose.yml -f docker-compose.prod.yml build",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "prepare": "husky"
+  },
+  "lint-staged": {
+    "**/*.{ts,tsx}": [
+      "eslint --fix"
+    ]
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "packageManager": "pnpm@9.15.4",
+  "devDependencies": {
+    "@commitlint/cli": "^20.5.0",
+    "@commitlint/config-conventional": "^20.5.0",
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.2.0",
+    "globals": "^17.4.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.4.0",
+    "typescript-eslint": "^8.58.1"
+  }
+}

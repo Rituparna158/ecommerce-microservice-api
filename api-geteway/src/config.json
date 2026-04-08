@@ -1,0 +1,129 @@
+{
+  "services": {
+    "products": {
+      "urlEnv": "PRODUCTS_SERVICE_URL",
+      "routes": [
+        {
+          "path": "/products",
+          "methods": ["get", "post"],
+          "middlewares": ["auth"]
+        },
+        {
+          "path": "/products/:id",
+          "methods": ["get"],
+          "middlewares": ["auth"]
+        }
+      ]
+    },
+    "inventorys": {
+      "urlEnv": "INVENTORY_SERVICE_URL",
+      "routes": [
+        {
+          "path": "/inventorys/:id",
+          "methods": ["put"],
+          "middlewares": ["auth"]
+        },
+        {
+          "path": "/inventorys/:id/details",
+          "methods": ["get"],
+          "middlewares": []
+        }
+      ]
+    },
+    "auth": {
+      "urlEnv": "AUTH_SERVICE_URL",
+      "routes": [
+        {
+          "path": "/auth/login",
+          "methods": ["post"],
+          "middlewares": []
+        },
+        {
+          "path": "/auth/register",
+          "methods": ["post"],
+          "middlewares": []
+        },
+        {
+          "path": "/auth/verify-token",
+          "methods": ["post"],
+          "middlewares": []
+        },
+        {
+          "path": "/auth/verify-email",
+          "methods": ["post"],
+          "middlewares": []
+        }
+      ]
+    },
+    "users": {
+      "urlEnv": "USER_SERVICE_URL",
+      "routes": [
+        {
+          "path": "/users/:id",
+          "methods": ["get"],
+          "middlewares": ["auth"]
+        },
+        {
+          "path": "/users",
+          "methods": ["post"],
+          "middlewares": []
+        }
+      ]
+    },
+    "cart": {
+      "urlEnv": "CART_SERVICE_URL",
+      "routes": [
+        {
+          "path": "/cart",
+          "methods": ["post"],
+          "middlewares": ["auth"]
+        },
+        {
+          "path": "/cart/me",
+          "methods": ["get"],
+          "middlewares": ["auth"]
+        },
+        {
+          "path": "/cart/clear",
+          "methods": ["get"],
+          "middlewares": ["auth"]
+        }
+      ]
+    },
+    "email": {
+      "urlEnv": "EMAIL_SERVICE_URL",
+      "routes": [
+        {
+          "path": "/email/send",
+          "methods": ["post"],
+          "middlewares": ["auth"]
+        },
+        {
+          "path": "/emails",
+          "methods": ["get"],
+          "middlewares": ["auth"]
+        }
+      ]
+    },
+    "order": {
+      "urlEnv": "ORDER_SERVICE_URL",
+      "routes": [
+        {
+          "path": "/orders/checkout",
+          "methods": ["post"],
+          "middlewares": ["auth"]
+        },
+        {
+          "path": "/orders",
+          "methods": ["get"],
+          "middlewares": ["auth"]
+        },
+        {
+          "path": "/orders/:id",
+          "methods": ["get"],
+          "middlewares": ["auth"]
+        }
+      ]
+    }
+  }
+}

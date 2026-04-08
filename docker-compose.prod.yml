@@ -1,0 +1,189 @@
+# docker-compose.prod.yml
+# Production: all application services + infrastructure
+# Usage: docker compose -f docker-compose.yml -f docker-compose.prod.yml up --build
+
+version: "3.8"
+
+services:
+  # ---- Application Services ----
+
+  api-gateway:
+    build:
+      context: ./api-geteway
+      dockerfile: Dockerfile
+    container_name: api-gateway
+    restart: on-failure
+    ports:
+      - "8081:8081"
+    environment:
+      PORT: 8081
+      NODE_ENV: production
+      AUTH_SERVICE_URL: http://auth:4003
+      PRODUCTS_SERVICE_URL: http://products:4002
+      INVENTORY_SERVICE_URL: http://inventorys:4002
+      USER_SERVICE_URL: http://user:4004
+      EMAIL_SERVICE_URL: http://email:4005
+      CART_SERVICE_URL: http://cart:4006
+      ORDER_SERVICE_URL: http://order:4007
+    depends_on:
+      - auth
+      - products
+      - inventorys
+      - user
+      - order
+      - cart
+      - email
+    networks:
+      - ecommerce-network
+
+  auth:
+    build:
+      context: ./services/auth
+      dockerfile: Dockerfile
+    container_name: auth
+    restart: on-failure
+    ports:
+      - "4003:4003"
+    environment:
+      PORT: 4003
+      SERVICE_NAME: AUTH SERVICE
+      NODE_ENV: production
+      DATABASE_URL: postgresql://postgres:postgres@postgres:5433/auth_db?schema=public
+      USER_SERVICE_URL: http://user:4004
+      EMAIL_SERVICE_URL: http://email:4005
+      JWT_SCRECT_KEY: ${JWT_SECRET_KEY:-change-me-in-production}
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - ecommerce-network
+
+  user:
+    build:
+      context: ./services/user
+      dockerfile: Dockerfile
+    container_name: user
+    restart: on-failure
+    ports:
+      - "4004:4004"
+    environment:
+      PORT: 4004
+      SERVICE_NAME: USER SERVICE
+      NODE_ENV: production
+      DATABASE_URL: postgresql://postgres:postgres@postgres:5432/user_db?schema=public
+      INVENTORY_SERVICE_URL: http://inventorys:4002
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - ecommerce-network
+
+  email:
+    build:
+      context: ./services/email
+      dockerfile: Dockerfile
+    container_name: email
+    restart: on-failure
+    ports:
+      - "4005:4005"
+    environment:
+      PORT: 4005
+      SERVICE_NAME: EMAIL SERVICE
+      NODE_ENV: production
+      DATABASE_URL: postgresql://postgres:postgres@postgres:5432/email_db?schema=public
+      SMTP_HOST: mailhog
+      DEFAULT_EMAIL: admin@gmail.com
+    depends_on:
+      postgres:
+        condition: service_healthy
+      mailhog:
+        condition: service_started
+    networks:
+      - ecommerce-network
+
+  products:
+    build:
+      context: ./services/products
+      dockerfile: Dockerfile
+    container_name: products
+    restart: on-failure
+    ports:
+      - "4001:4001"
+    environment:
+      PORT: 4001
+      SERVICE_NAME: PRODUCTS SERVICE
+      NODE_ENV: production
+      DATABASE_URL: postgresql://postgres:postgres@postgres:5432/product_db?schema=public
+      INVENTORY_SERVICE_URL: http://inventorys:4002
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - ecommerce-network
+
+  inventorys:
+    build:
+      context: ./services/inventorys
+      dockerfile: Dockerfile
+    container_name: inventorys
+    restart: on-failure
+    ports:
+      - "4002:4002"
+    environment:
+      PORT: 4002
+      SERVICE_NAME: INVENTORY SERVICE
+      NODE_ENV: production
+      DATABASE_URL: postgresql://postgres:postgres@postgres:5432/inventory_db?schema=public
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - ecommerce-network
+
+  cart:
+    build:
+      context: ./services/cart
+      dockerfile: Dockerfile
+    container_name: cart
+    restart: on-failure
+    ports:
+      - "4006:4006"
+    environment:
+      PORT: 4006
+      SERVICE_NAME: CART SERVICE
+      NODE_ENV: production
+      REDIS_HOST: redis-stack
+      REDIS_PORT: 6379
+      INVENTORY_SERVICE_URL: http://inventorys:4002
+    depends_on:
+      redis:
+        condition: service_started
+    networks:
+      - ecommerce-network
+
+  order:
+    build:
+      context: ./services/order
+      dockerfile: Dockerfile
+    container_name: order
+    restart: on-failure
+    ports:
+      - "4007:4007"
+    environment:
+      PORT: 4007
+      SERVICE_NAME: ORDER SERVICE
+      NODE_ENV: production
+      DATABASE_URL: postgresql://postgres:postgres@postgres:5433/order_db?schema=public
+      INVENTORY_SERVICE_URL: http://inventorys:4002
+      CART_SERVICE_URL: http://cart:4006
+      EMAIL_SERVICE_URL: http://email:4005
+      PRODUCT_SERVICE_URL: http://products:4001
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - ecommerce-network
+
+networks:
+  ecommerce-network:
+    driver: bridge
