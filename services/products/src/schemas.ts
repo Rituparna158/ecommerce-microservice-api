@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { STATUS } from "@prisma/client";
+import { STATUS } from "./generated/prisma";
 
 export const productCreateSchema = z.object({
   sku: z.string().min(3).max(10),

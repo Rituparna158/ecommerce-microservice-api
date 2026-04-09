@@ -72,9 +72,6 @@ importers:
       ts-node-dev:
         specifier: ^2.0.0
         version: 2.0.0(@types/node@22.19.17)(typescript@5.9.3)
-      tsc:
-        specifier: ^2.0.4
-        version: 2.0.4
       tsc-alias:
         specifier: ^1.8.10
         version: 1.8.16
@@ -133,9 +130,6 @@ importers:
       ts-node-dev:
         specifier: ^2.0.0
         version: 2.0.0(@types/node@22.19.17)(typescript@5.9.3)
-      tsc:
-        specifier: ^2.0.4
-        version: 2.0.4
       tsc-alias:
         specifier: ^1.8.10
         version: 1.8.16
@@ -197,9 +191,6 @@ importers:
       ts-node-dev:
         specifier: ^2.0.0
         version: 2.0.0(@types/node@22.19.17)(typescript@5.9.3)
-      tsc:
-        specifier: ^2.0.4
-        version: 2.0.4
       tsc-alias:
         specifier: ^1.8.10
         version: 1.8.16
@@ -264,9 +255,6 @@ importers:
       ts-node-dev:
         specifier: ^2.0.0
         version: 2.0.0(@types/node@22.19.17)(typescript@5.9.3)
-      tsc:
-        specifier: ^2.0.4
-        version: 2.0.4
       tsc-alias:
         specifier: ^1.8.10
         version: 1.8.16
@@ -313,9 +301,6 @@ importers:
       ts-node-dev:
         specifier: ^2.0.0
         version: 2.0.0(@types/node@22.19.17)(typescript@5.9.3)
-      tsc:
-        specifier: ^2.0.4
-        version: 2.0.4
       tsc-alias:
         specifier: ^1.8.10
         version: 1.8.16
@@ -365,9 +350,6 @@ importers:
       ts-node-dev:
         specifier: ^2.0.0
         version: 2.0.0(@types/node@22.19.17)(typescript@5.9.3)
-      tsc:
-        specifier: ^2.0.4
-        version: 2.0.4
       tsc-alias:
         specifier: ^1.8.10
         version: 1.8.16
@@ -417,9 +399,6 @@ importers:
       ts-node-dev:
         specifier: ^2.0.0
         version: 2.0.0(@types/node@22.19.17)(typescript@5.9.3)
-      tsc:
-        specifier: ^2.0.4
-        version: 2.0.4
       tsc-alias:
         specifier: ^1.8.10
         version: 1.8.16
@@ -469,9 +448,6 @@ importers:
       ts-node-dev:
         specifier: ^2.0.0
         version: 2.0.0(@types/node@22.19.17)(typescript@5.9.3)
-      tsc:
-        specifier: ^2.0.4
-        version: 2.0.4
       tsc-alias:
         specifier: ^1.8.10
         version: 1.8.16
@@ -2121,10 +2097,6 @@ packages:
   tsc-alias@1.8.16:
     resolution: {integrity: sha512-QjCyu55NFyRSBAl6+MTFwplpFcnm2Pq01rR/uxfqJoLMm6X3O14KEGtaSDZpJYaE1bJBGDjD0eSuiIWPe2T58g==}
     engines: {node: '>=16.20.2'}
-    hasBin: true
-
-  tsc@2.0.4:
-    resolution: {integrity: sha512-fzoSieZI5KKJVBYGvwbVZs/J5za84f2lSTLPYf6AGiIf43tZ3GNrI1QzTLcjtyDDP4aLxd46RTZq1nQxe7+k5Q==}
     hasBin: true
 
   tsconfig-paths@4.2.0:
@@ -3923,8 +3895,6 @@ snapshots:
       mylas: 2.1.14
       normalize-path: 3.0.0
       plimit-lit: 1.6.1
-
-  tsc@2.0.4: {}
 
   tsconfig-paths@4.2.0:
     dependencies:
