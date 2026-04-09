@@ -5,7 +5,7 @@ import jwt from "jsonwebtoken";
 import prisma from "@/prisma";
 
 import { userLoginSchema } from "../schemas";
-import { LoginAttemt } from "@prisma/client";
+import { LoginAttemt } from "@/generated/prisma/client";
 
 type LoginHistory = {
   ipAddress: string | undefined;
