@@ -18,7 +18,7 @@ const sentEmail = async (req: Request, res: Response, next: NextFunction) => {
     const { recipient, subject, body, sender, source } = parseBody.data;
 
     console.log("rejected");
-    const from = sender;
+    const from = sender || default_sender
 
     const emailOptions = {
       from,
