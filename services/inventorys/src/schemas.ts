@@ -1,4 +1,4 @@
-import { ActionType } from "@prisma/client";
+import { ActionType } from "./generated/prisma";
 import { z } from "zod";
 
 export const inventorySchema = z.object({

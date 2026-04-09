@@ -24,7 +24,11 @@ export const createHandler = (
       let url = `${hostname}${path}`;
       if (req.params) {
         Object.keys(req.params).forEach((param) => {
-          url = url.replace(`:${param}`, req.params[param]);
+          const paramValue = req.params[param];
+          const normalizedValue = Array.isArray(paramValue)
+            ? paramValue[0] ?? ""
+            : paramValue ?? "";
+          url = url.replace(`:${param}`, normalizedValue);
         });
       }
 
