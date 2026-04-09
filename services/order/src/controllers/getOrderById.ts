@@ -12,7 +12,9 @@ const getOrderById = async (
         //type issue solved
         id: req.params.id as string,
       },
+      include:{orderItems:true},
     });
+    
     if (!order) {
       res.status(404).json({ error: "Order not found" });
       return;
