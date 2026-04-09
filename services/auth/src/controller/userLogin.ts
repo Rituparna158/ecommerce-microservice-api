@@ -104,8 +104,8 @@ const userLogin = async (
     const accessToken = jwt.sign(
       {
         id: user.id,
-        name: user.email,
-        email: user.name,
+        name: user.name,
+        email: user.email,
       },
 
       (process.env.JWT_SCRECT_KEY as string) || "secret",
