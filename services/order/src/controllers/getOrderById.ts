@@ -9,7 +9,8 @@ const getOrderById = async (
   try {
     const order = await prisma.order.findUnique({
       where: {
-        id: req.params.id,
+        //type issue solved
+        id: req.params.id as string,
       },
     });
     if (!order) {
